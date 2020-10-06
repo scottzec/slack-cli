@@ -10,7 +10,7 @@ describe Recipient do
     before do
       @slack_id = 4
       @name = "#random"
-      @recipient = Recipient.new(slack_id: @slack_id, name: @name)
+      @recipient = Recipient.new(@slack_id, @name)
     end
 
     it "creates a Recipient object" do
