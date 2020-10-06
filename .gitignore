@@ -6,3 +6,6 @@
 .env
 
 /lib/driver.rb
+
+.floo
+.flooignore
