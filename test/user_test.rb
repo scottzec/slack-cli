@@ -1,8 +1,5 @@
 require_relative "test_helper"
 
-require 'simplecov'
-SimpleCov.start
-
 describe User do
   describe "constructor" do
 
