@@ -3,7 +3,6 @@ require 'dotenv'
 
 Dotenv.load
 
-
 class User < Recipient
   attr_reader :username, :real_name
 
@@ -17,7 +16,11 @@ class User < Recipient
   end
 
   def self.list_all
-    self.get(USER_LIST_URL, query)
+    query = {
+        token: ENV["SLACK_TOKEN"]
+    }
+    response = self.get(USER_LIST_URL, query)
+    return response
   end
 
 end
