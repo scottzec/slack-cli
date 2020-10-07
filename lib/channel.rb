@@ -18,6 +18,14 @@ class Channel < Recipient
         token: ENV["SLACK_TOKEN"]
     }
     response = self.get(CHANNEL_LIST_URL, query)
-    return response
+
+    # TODO: check for errors
+
+    responses = response["channels"].map do |channel|
+      self.new(slack_id: channel["id"], name: channel["name"],
+        channel_name: channel["name"], topic: channel["topic"],
+        member_count: channel["num_members"])
+    end
+    return responses
   end
 end
