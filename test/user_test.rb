@@ -24,6 +24,17 @@ describe User do
   end
 
   describe "list_all" do
+
+    before do
+      VCR.use_cassette("slack_user") do
+        user_list_url = "https://slack.com/api/users.list"
+        @query = {
+            token: ENV["SLACK_TOKEN"]
+        }
+        @response = User.get(user_list_url, @query)
+      end
+    end
+
     it "checks list_all returns an array of user instances" do
       VCR.use_cassette("slack_user") do
         users = User.list_all
@@ -35,37 +46,18 @@ describe User do
 
 
     it "checks successful get method response" do
-      VCR.use_cassette("slack_user") do
-        user_list_url = "https://slack.com/api/users.list"
-        query = {
-            token: ENV["SLACK_TOKEN"]
-        }
-        response = User.get(user_list_url, query)
-
-        expect(response["ok"]).must_equal true
-      end
+      expect(@response["ok"]).must_equal true
     end
 
     it "raises ArgumentError if failed API call" do
       VCR.use_cassette("slack_user") do
-        user_list_url = "https://slack.com/api/users.list5"
-        query = {
-            token: ENV["SLACK_TOKEN"]
-        }
-        expect{User.get(user_list_url, query)}.must_raise ArgumentError
+        bad_user_list_url = "https://slack.com/api/users.list5"
+        expect{User.get(bad_user_list_url, @query)}.must_raise ArgumentError
       end
     end
 
     it "checks no error key returned in response" do
-      VCR.use_cassette("slack_user") do
-        user_list_url = "https://slack.com/api/users.list"
-        query = {
-            token: ENV["SLACK_TOKEN"]
-        }
-        response = User.get(user_list_url, query)
-
-        expect(response["error"]).must_be_nil
-      end
+        expect(@response["error"]).must_be_nil
     end
   end
 end
