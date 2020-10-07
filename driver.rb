@@ -17,8 +17,8 @@ query = {
 # tp Author.limit(3), "name", "books.title", "books.photos.caption"
 # tp Book.all, :author, "title"
 
-w = Workspace.new
-tp w, :channels["channels"]
+# w = Workspace.new
+# tp w, :channels
 
    # channels: lambda{|u| u.monthly_payment * 12}
 
@@ -34,7 +34,8 @@ tp w, :channels["channels"]
 
 
 
-# channels = Channel.list_all
+channels = Channel.list_all
+tp channels
 # puts channels["channels"]
 # channel_names = channels["channels"].map{|channel| channel["name"]}
 # tp channel_names
