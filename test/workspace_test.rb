@@ -39,6 +39,7 @@ describe Workspace do
       end
     end
 
+
     it "id returns instance of channel" do
       VCR.use_cassette("workspace") do
         property = "id"
@@ -51,5 +52,43 @@ describe Workspace do
       end
     end
   end
+
+  describe "select user method" do
+
+    before do
+      VCR.use_cassette("workspace") do
+        @workspace = Workspace.new
+        @username = "slackbot"
+        @slack_id = "USLACKBOT"
+        @real_name = "Slackbot"
+        @name = "name"
+      end
+    end
+
+    it "name returns instance of user" do
+
+      VCR.use_cassette("workspace") do
+        property = "name"
+        selection = @workspace.select_user(@username, property)
+
+        expect(selection).must_be_instance_of User
+        expect(selection.slack_id).must_equal @slack_id
+        expect(selection.real_name).must_equal @real_name
+      end
+    end
+
+
+    it "id returns instance of user" do
+      VCR.use_cassette("workspace") do
+        property = "id"
+        selection = @workspace.select_user(@slack_id, property)
+
+        expect(selection).must_be_instance_of User
+        expect(selection.slack_id).must_equal @slack_id
+        expect(selection.real_name).must_equal @real_name
+      end
+    end
+  end
+
 end
 

@@ -4,6 +4,24 @@ require_relative "workspace"
 require "table_print"
 
 
+
+def recipient_details(input, workspace)
+  recipient_string = input.split(" ")[-1]
+  puts "Please enter the #{recipient_string} you want to see information for. \nDo you want to enter an ID or a name?"
+  property_type = gets.chomp
+  puts "Thanks! Please enter it"
+  name_or_id = gets.chomp
+  if recipient_string == "channel"
+    recipient = workspace.select_channel(name_or_id, property_type)
+  elsif recipient_string == "user"
+    recipient = workspace.select_user(name_or_id, property_type)
+  end
+  if recipient == nil
+    puts "This #{recipient_string} doesn't exist! Exiting..."
+  end
+  # return recipient
+end
+
 def program_prompt(users, channels, workspace)
   puts "Please enter your selected option:"
   puts "- list users"
@@ -20,14 +38,9 @@ def program_prompt(users, channels, workspace)
   when "list channels"
     tp channels
   when "select channel"
-    puts "Please enter the channel you want to see information for. \nDo you want to enter an ID or a name?"
-    property = gets.chomp
-    puts "Thanks! Please enter it"
-    user_channel = gets.chomp
-    channel = workspace.select_channel(user_channel, property)
-    if channel == nil
-      puts "This channel doesn't exist! Exiting..."
-    end
+    recipient_details(input, workspace)
+  when "select user"
+    recipient_details(input, workspace)
   when "details"
     puts workspace.show_details
   when "quit"
