@@ -8,7 +8,16 @@ class Workspace
   def initialize
     @users = User.list_all
     @channels = Channel.list_all
-    # @selected = ""
+  end
+
+  def select_user(user, property)
+    if property == "id"
+      selected_user = users.find{|user_instance| user_instance.slack_id == user}
+    elsif property == "name"
+      selected_user = users.find{|user_instance| user_instance.username == user}
+    end
+    @selected = selected_user
+    return selected_user
   end
 
   def select_channel(channel, property)
@@ -25,8 +34,8 @@ class Workspace
   def show_details
     if @channels.include?(@selected)
       return_string = "This is channel #{@selected.channel_name}, its topic is #{@selected.topic}. Its slack_id is #{@selected.slack_id}, and it has a member count of #{@selected.member_count}"
-    elsif @users.include?(selected)
-      return_string = "some user stuff"
+    elsif @users.include?(@selected)
+      return_string = "This is user #{@selected.username}. Their real name is #{@selected.real_name} and their slack id is #{@selected.slack_id}"
     else
       return_string = "No recipient selected"
     end
