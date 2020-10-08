@@ -3,7 +3,7 @@ require_relative "workspace"
 
 require "table_print"
 
-
+VALID_INPUT = ["list users", "list channels", "select channel", "select user", "details", "quit"]
 
 def recipient_details(input, workspace)
   recipient_string = input.split(" ")[-1]
@@ -51,8 +51,7 @@ end
 
 def validate_input(input)
   input.downcase!
-  valid_input = ["list users", "list channels", "quit"]
-  raise ArgumentError.new("Not a valid input") if valid_input.include?!(input)
+  raise ArgumentError.new("Not a valid input") unless VALID_INPUT.include?(input)
   return input
 end
 

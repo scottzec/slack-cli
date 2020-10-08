@@ -25,11 +25,19 @@ puts query[:token]
 
 # tp Author.limit(3), "name", "books.title", "books.photos.caption"
 # tp Book.all, :author, "title"
+#
+# w = Workspace.new
+# users = w.users
+# puts users
 
-w = Workspace.new
-users = w.users
-puts users
 
+input = "dfsddsf"
+valid_input = ["list users", "list channels", "quit"]
+unless valid_input.include?(input)
+  puts "doesnt include"
+end
+# puts valid_input.include?!(input)
+# raise ArgumentError.new("Not a valid input") if valid_input.include?!(input)
 
 
 # channels = w.channels
