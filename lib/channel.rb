@@ -19,8 +19,6 @@ class Channel < Recipient
     }
     response = self.get(CHANNEL_LIST_URL, query)
 
-    # TODO: check for errors
-
     responses = response["channels"].map do |channel|
       self.new(slack_id: channel["id"], name: channel["name"],
         channel_name: channel["name"], topic: channel["topic"],
