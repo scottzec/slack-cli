@@ -12,68 +12,58 @@ query = {
 }
 USER_LIST_URL = "https://slack.com/api/users.list?"
 
-puts query[:token]
+
+w = Workspace.new
+w.send_message("test message")
+
+# puts query[:token]
 
 # response = User.list_all
 # puts response
 
-# response = User.get(USER_LIST_URL, query)
-# puts response
-# puts response.code
-# user = User.new(slack_id: 4, username: "slackbot", real_name: "SlackBot", name: "name")
-# tp user
 
-# tp Author.limit(3), "name", "books.title", "books.photos.caption"
-# tp Book.all, :author, "title"
+# class ParentClass
 #
-# w = Workspace.new
-# users = w.users
-# puts users
-
-
-input = "dfsddsf"
-valid_input = ["list users", "list channels", "quit"]
-unless valid_input.include?(input)
-  puts "doesnt include"
-end
-# puts valid_input.include?!(input)
-# raise ArgumentError.new("Not a valid input") if valid_input.include?!(input)
-
-
-# channels = w.channels
-# puts channels[0].channel_name.class
-
-# puts w.channels
-# puts channels.find{|channel| channel.channel_name == "general"}
-
-   # channels: lambda{|u| u.monthly_payment * 12}
-
-# yearly_payment: lambda{|u| u.monthly_payment * 12}
-# channels["channels"].map{|channel| channel["name"]}
-
-# Need to figure out how to access in array of hashes to acces names for each channel
-
-
-# users = User.list_all
-# tp users
-# tp users, :slack_id, :username, :real_name, :name
-# puts users[1]
-# puts users[1].slack_id
-
-
-
-
-
-# channels = Channel.list_all
-# puts channels[0]
-# puts channels[0].channel_name
-# tp channels
-
-
-# puts channels["channels"]
-# channel_names = channels["channels"].map{|channel| channel["name"]}
-# tp channel_names
-
+#   def self.send_message(message)
 #
-# response = HTTParty.get("https://slack.com/api/users.list", query: query)
-# puts response
+#     body_param = {
+#         token: ENV["SLACK_TOKEN"],
+#         text: message,
+#         channel: nil
+#     }
+#     # response = HTTParty.post(
+#     #     "https://slack.com/api/chat.postMessage",
+#     #     body: body_param,
+#     #     headers: { 'Content-Type' => 'application/x-www-form-urlencoded' }
+#     # )
+#     #
+#     # response_string = validate_post(response)
+#     # return response_string
+#     return body_param
+#   end
+#   #
+#   # def self.send_message(message)
+#   #   return "this is a message"
+#   # end
+#
+# end
+
+# class ChildClass < ParentClass
+#
+#   def self.send_message(message)
+#     super
+#     # body_param[:channel] = "general"
+#     # return body_param
+#   end
+#
+#   # def self.send_message(message)
+#   #   return "#{message} : #{super}"
+#   # end
+# end
+
+# parent = ParentClass.new
+# puts ParentClass.send_message("this is a message")
+
+# child = ChildClass.new
+puts ChildClass.send_message("new message")
+
