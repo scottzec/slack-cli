@@ -53,6 +53,7 @@ http_interactions:
       encoding: ASCII-8BIT
       string: '{"ok":false,"error":"unknown_method","req_method":"converastions.list"}'
   recorded_at: Wed, 07 Oct 2020 23:46:16 GMT
+
 - request:
     method: get
     uri: https://slack.com/api/conversations.list?token=<SLACK_TOKEN>

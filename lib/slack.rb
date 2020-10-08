@@ -4,11 +4,22 @@ require_relative "workspace"
 require "table_print"
 
 
-def program_prompt
+def program_prompt(users, channels)
   puts "Please enter your selected option:"
   puts "- list users"
   puts "- list channels"
   puts "- quit"
+
+  input = validate_input(gets.chomp)
+  case input
+  when "list users"
+    tp users
+  when "list channels"
+    tp channels
+  when "quit"
+    exit
+  end
+  return input
 end
 
 def validate_input(input)
@@ -27,19 +38,9 @@ def main
 
   puts "There are #{users.length} users and #{channels.length} channels in this workspace"
 
-  program_prompt
-  input = validate_input(gets.chomp)
+  input = program_prompt(users, channels)
   until input == "quit"
-    case input
-    when "list users"
-      tp users
-    when "list channels"
-      tp channels
-    when "quit"
-      exit
-    end
-    program_prompt
-    input = validate_input(gets.chomp)
+    input = program_prompt(users, channels)
   end
   puts "Thank you for using the Ada Slack CLI"
 end
