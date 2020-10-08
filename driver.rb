@@ -22,7 +22,11 @@ USER_LIST_URL = "https://slack.com/api/users.listss"
 # tp Book.all, :author, "title"
 
 w = Workspace.new
-puts w.users
+channels = w.channels
+# puts channels[0].channel_name.class
+
+# puts w.channels
+puts channels.find{|channel| channel.channel_name == "general"}
 
    # channels: lambda{|u| u.monthly_payment * 12}
 
