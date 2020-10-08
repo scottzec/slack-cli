@@ -5,8 +5,8 @@ class Channel < Recipient
 
   CHANNEL_LIST_URL = "https://slack.com/api/conversations.list"
 
-  def initialize(slack_id:, name:, channel_name:, topic:, member_count:)
-    super(slack_id, name)
+  def initialize(slack_id:, channel_name:, topic:, member_count:)
+    super(slack_id)
 
       @channel_name = channel_name
       @topic = topic
@@ -20,9 +20,8 @@ class Channel < Recipient
     response = self.get(CHANNEL_LIST_URL, query)
 
     responses = response["channels"].map do |channel|
-      self.new(slack_id: channel["id"], name: channel["name"],
-        channel_name: channel["name"], topic: channel["topic"],
-        member_count: channel["num_members"])
+      self.new(slack_id: channel["id"], channel_name: channel["name"],
+      topic: channel["topic"], member_count: channel["num_members"])
     end
     return responses
   end

@@ -10,8 +10,13 @@ Dotenv.load
 query = {
     token: ENV["SLACK_TOKEN"]
 }
-USER_LIST_URL = "https://slack.com/api/users.listss"
-#
+USER_LIST_URL = "https://slack.com/api/users.list?"
+
+puts query[:token]
+
+# response = User.list_all
+# puts response
+
 # response = User.get(USER_LIST_URL, query)
 # puts response
 # puts response.code
@@ -22,11 +27,16 @@ USER_LIST_URL = "https://slack.com/api/users.listss"
 # tp Book.all, :author, "title"
 
 w = Workspace.new
-channels = w.channels
+users = w.users
+puts users
+
+
+
+# channels = w.channels
 # puts channels[0].channel_name.class
 
 # puts w.channels
-puts channels.find{|channel| channel.channel_name == "general"}
+# puts channels.find{|channel| channel.channel_name == "general"}
 
    # channels: lambda{|u| u.monthly_payment * 12}
 

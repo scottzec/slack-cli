@@ -61,7 +61,6 @@ describe Workspace do
         @username = "slackbot"
         @slack_id = "USLACKBOT"
         @real_name = "Slackbot"
-        @name = "name"
       end
     end
 

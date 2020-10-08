@@ -4,10 +4,9 @@ describe User do
   describe "constructor" do
     before do
       slack_id = 4
-      name = "name"
       @username = "SlackBot"
       @real_name = "Slack Bot"
-      @user = User.new(slack_id: slack_id, username: @username, real_name: @real_name, name: name)
+      @user = User.new(slack_id: slack_id, username: @username, real_name: @real_name)
     end
 
     it "creates a User object" do

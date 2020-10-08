@@ -5,11 +5,10 @@ describe Channel do
 
     before do
       slack_id = 4
-      name = "name"
       @channel_name = "#random"
       @topic = "random stuff"
       @member_count = 12
-      @channel = Channel.new(slack_id: slack_id, name: name, channel_name: @channel_name, topic: @topic, member_count: @member_count)
+      @channel = Channel.new(slack_id: slack_id, channel_name: @channel_name, topic: @topic, member_count: @member_count)
     end
 
     it "creates a Channel object" do
