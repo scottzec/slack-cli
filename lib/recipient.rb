@@ -43,4 +43,12 @@ class Recipient
   end
 
   # Consider testing get method here instead of in user and recipient test files
+  #
+  private
+
+  def validate_post(response)
+    raise ArgumentError.new("API call failed with code #{response.code} and error #{response['error']}") if response["ok"] == false
+    return "Thank you this message was sent"
+  end
+  
 end
