@@ -1,13 +1,18 @@
 require_relative 'user'
 require_relative 'channel'
 
-class Workspace
+class Workspace < Recipient
 
   attr_reader :users, :channels
 
   def initialize
     @users = User.list_all
     @channels = Channel.list_all
+    @selected = nil
+  end
+
+  def send_message(message)
+    @selected.send_message(message)
   end
 
   def select_user(user, property)
