@@ -8,6 +8,7 @@ class Workspace
   def initialize
     @users = User.list_all
     @channels = Channel.list_all
+    # @selected = ""
   end
 
   def select_channel(channel, property)
