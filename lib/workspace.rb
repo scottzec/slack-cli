@@ -15,6 +15,29 @@ class Workspace < Recipient
     @selected.send_message(message)
   end
 
+  def send_message(message)
+
+    # TODO: DRY THIS UP WITH SUPER
+    body_param = {
+        token: ENV["SLACK_TOKEN"],
+        text: message,
+        # this will only work for channels and not users
+        channel: @selected.channel_name
+    }
+
+    response = HTTParty.post(
+        "https://slack.com/api/chat.postMessage",
+        body: body_param,
+        headers: { 'Content-Type' => 'application/x-www-form-urlencoded' }
+    )
+
+    # response_string = validate_post(response)
+    raise ArgumentError.new("API call failed with code #{response.code} and error #{response['error']}") if response["ok"] == false
+    # return response_string
+    return "Thanks"
+
+  end
+
   def select_user(user, property)
     if property == "id"
       selected_user = users.find{|user_instance| user_instance.slack_id == user}

@@ -32,6 +32,7 @@ class Recipient
     response_string = validate_post(response)
 
     return response_string
+
   end
 
   def self.list_all
