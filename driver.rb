@@ -11,18 +11,18 @@ query = {
     token: ENV["SLACK_TOKEN"]
 }
 USER_LIST_URL = "https://slack.com/api/users.listss"
-
-response = User.get(USER_LIST_URL, query)
-puts response
-puts response.code
+#
+# response = User.get(USER_LIST_URL, query)
+# puts response
+# puts response.code
 # user = User.new(slack_id: 4, username: "slackbot", real_name: "SlackBot", name: "name")
 # tp user
 
 # tp Author.limit(3), "name", "books.title", "books.photos.caption"
 # tp Book.all, :author, "title"
 
-# w = Workspace.new
-# tp w, :channels
+w = Workspace.new
+puts w.users
 
    # channels: lambda{|u| u.monthly_payment * 12}
 
