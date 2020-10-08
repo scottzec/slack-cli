@@ -1,36 +1,18 @@
 require_relative 'user'
 require_relative 'channel'
 
-class Workspace
+class Workspace < Recipient
 
   attr_reader :users, :channels
 
   def initialize
     @users = User.list_all
     @channels = Channel.list_all
+    @selected = nil
   end
 
   def send_message(message)
-
-    # TODO: DRY THIS UP WITH SUPER
-    body_param = {
-        token: ENV["SLACK_TOKEN"],
-        text: message,
-        # this will only work for channels and not users
-        channel: @selected.channel_name
-    }
-
-    response = HTTParty.post(
-        "https://slack.com/api/chat.postMessage",
-        body: body_param,
-        headers: { 'Content-Type' => 'application/x-www-form-urlencoded' }
-    )
-
-    # response_string = validate_post(response)
-    raise ArgumentError.new("API call failed with code #{response.code} and error #{response['error']}") if response["ok"] == false
-    # return response_string
-    return "Thanks"
-
+    @selected.send_message(message)
   end
 
   def select_user(user, property)
