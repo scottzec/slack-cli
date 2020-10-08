@@ -1,7 +1,4 @@
 require 'httparty'
-require 'dotenv'
-
-Dotenv.load
 
 class Recipient
   attr_reader :slack_id
@@ -15,6 +12,7 @@ class Recipient
     raise ArgumentError.new("API call failed with code #{response.code} and error #{response['error']}") if response["ok"] == false
     return response
   end
+
 
   def send_message(message)
 
@@ -35,19 +33,13 @@ class Recipient
 
   end
 
+
   def self.list_all
     raise NotImplementedError.new("Implement me in a child class")
   end
 
   def details
     raise NotImplementedError.new("Implement me in a child class")
-  end
-
-  private
-
-  def validate_post(response)
-    raise ArgumentError.new("API call failed with code #{response.code} and error #{response['error']}") if response["ok"] == false
-    return "Thank you this message was sent"
   end
 
   # Consider testing get method here instead of in user and recipient test files

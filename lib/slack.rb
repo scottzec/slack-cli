@@ -3,14 +3,13 @@ require_relative "workspace"
 
 require "table_print"
 
-VALID_INPUT = ["list users", "list channels", "select channel", "select user", "send message", "details", "quit"]
+
 
 def recipient_details(input, workspace)
   recipient_string = input.split(" ")[-1]
   puts "Please enter the #{recipient_string} you want to see information for. \nDo you want to enter an ID or a name?"
   property_type = gets.chomp
   puts "Thanks! Please enter it"
-  # TODO: ADD VALIDATIONS HERE
   name_or_id = gets.chomp
   if recipient_string == "channel"
     recipient = workspace.select_channel(name_or_id, property_type)
@@ -29,7 +28,6 @@ def program_prompt(users, channels, workspace)
   puts "- list channels"
   puts "- select channel"
   puts "- select user"
-  puts "- send message"
   puts "- details"
   puts "- quit"
 
@@ -45,10 +43,6 @@ def program_prompt(users, channels, workspace)
     recipient_details(input, workspace)
   when "details"
     puts workspace.show_details
-  when "send message"
-    puts "What message would you like to send?"
-    message = gets.chomp
-    puts workspace.send_message(message)
   when "quit"
     exit
   end
@@ -57,7 +51,8 @@ end
 
 def validate_input(input)
   input.downcase!
-  raise ArgumentError.new("Not a valid input") unless VALID_INPUT.include?(input)
+  valid_input = ["list users", "list channels", "quit"]
+  raise ArgumentError.new("Not a valid input") if valid_input.include?!(input)
   return input
 end
 
