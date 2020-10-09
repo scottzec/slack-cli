@@ -12,7 +12,7 @@ class Workspace < Recipient
   end
 
   def send_message(message)
-    raise ArgumentError.new("This recipient doesn't exist") unless @selected
+    raise SlackAPIError.new("This recipient doesn't exist") unless @selected
     @selected.send_message(message)
   end
 
@@ -23,6 +23,7 @@ class Workspace < Recipient
       selected_user = users.find{|user_instance| user_instance.username == user}
     end
     @selected = selected_user
+
     return selected_user
   end
 
@@ -33,9 +34,9 @@ class Workspace < Recipient
       selected_channel =  channels.find{|channel_instance| channel_instance.channel_name == channel}
     end
     @selected = selected_channel
+
     return selected_channel
   end
-
 
   def show_details
     if @channels.include?(@selected)

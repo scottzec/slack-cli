@@ -50,8 +50,8 @@ describe User do
 
     it "raises ArgumentError if failed API call" do
       VCR.use_cassette("slack_user") do
-        bad_user_list_url = "https://slack.com/api/users.list5"
-        expect{User.get(bad_user_list_url, @query)}.must_raise ArgumentError
+        bad_user_list_url = "https://slack.com/api/users.list555555"
+        expect{User.get(bad_user_list_url, @query)}.must_raise SlackAPIError
       end
     end
 
@@ -59,4 +59,5 @@ describe User do
         expect(@response["error"]).must_be_nil
     end
   end
+
 end

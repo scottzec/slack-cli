@@ -1,0 +1,1 @@
+class SlackAPIError < StandardError ; end

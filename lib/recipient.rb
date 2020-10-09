@@ -1,6 +1,8 @@
 require 'httparty'
 require 'dotenv'
 
+require_relative 'slack_api_error'
+
 Dotenv.load
 
 class Recipient
@@ -12,7 +14,7 @@ class Recipient
 
   def self.get(url, params)
     response = HTTParty.get(url, query: params)
-    raise ArgumentError.new("API call failed with code #{response.code} and error #{response['error']}") if response["ok"] == false
+    raise SlackAPIError.new("API call failed with code #{response.code} and error #{response['error']}") if response["ok"] == false
     return response
   end
 
@@ -45,9 +47,8 @@ class Recipient
   private
 
   def validate_post(response)
-    raise ArgumentError.new("API call failed with code #{response.code} and error #{response['error']}") if response["ok"] == false
+    raise SlackAPIError.new("API call failed with code #{response.code} and error #{response['error']}") if response["ok"] == false
     return "Thank you this message was sent"
   end
 
-  # Consider testing get method here instead of in user and recipient test files
 end

@@ -76,7 +76,6 @@ describe Workspace do
       end
     end
 
-
     it "id returns instance of user" do
       VCR.use_cassette("workspace") do
         property = "id"
@@ -107,7 +106,7 @@ describe Workspace do
       VCR.use_cassette("workspace") do
         message = "test"
         workspace = Workspace.new
-        expect{workspace.send_message(message)}.must_raise ArgumentError
+        expect{workspace.send_message(message)}.must_raise SlackAPIError
       end
     end
   end

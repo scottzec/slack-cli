@@ -27,7 +27,6 @@ describe Channel do
       expect(@channel.member_count).must_equal @member_count
     end
 
-    # Add tests for data type
   end
 
   describe "list_all" do
@@ -50,7 +49,6 @@ describe Channel do
       end
     end
 
-
     it "checks successful get method response" do
       expect(@response["ok"]).must_equal true
     end
@@ -58,7 +56,7 @@ describe Channel do
     it "raises ArgumentError if failed API call" do
       VCR.use_cassette("slack_channel") do
         bad_channel_list_url = "https://slack.com/api/conversations.list5"
-        expect{Channel.get(bad_channel_list_url, @query)}.must_raise ArgumentError
+        expect{Channel.get(bad_channel_list_url, @query)}.must_raise SlackAPIError
       end
     end
 
@@ -66,4 +64,5 @@ describe Channel do
       expect(@response["error"]).must_be_nil
     end
   end
+
 end
