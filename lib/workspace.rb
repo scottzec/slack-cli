@@ -12,6 +12,7 @@ class Workspace < Recipient
   end
 
   def send_message(message)
+    raise ArgumentError.new("This recipient doesn't exist") unless @selected
     @selected.send_message(message)
   end
 

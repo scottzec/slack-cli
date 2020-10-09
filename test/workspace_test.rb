@@ -89,5 +89,32 @@ describe Workspace do
     end
   end
 
+  describe "send message method" do
+
+    # before do
+
+
+    it "entering user sends message" do
+      VCR.use_cassette("workspace") do
+        message = "test"
+        user = "scottzec"
+        property = "name"
+        workspace = Workspace.new
+        selected = workspace.select_user(user, property)
+        message_receipt = selected.send_message(message)
+
+        expect(message_receipt).must_equal "Thank you this message was sent"
+      end
+    end
+
+    it "raises error if no recipient selected" do
+      VCR.use_cassette("workspace") do
+        message = "test"
+        workspace = Workspace.new
+        expect{workspace.send_message(message)}.must_raise ArgumentError
+      end
+    end
+  end
+
 end
 
