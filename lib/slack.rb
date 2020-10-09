@@ -5,12 +5,22 @@ require "table_print"
 
 VALID_INPUT = ["list users", "list channels", "select channel", "select user", "send message", "details", "quit"]
 
+def validate_property_type(property_type)
+  property_type.downcase!
+  valid_property_types = ["name", "id"]
+  return false unless valid_property_types.include?(property_type)
+  return true
+end
+
 def recipient_details(input, workspace)
   recipient_string = input.split(" ")[-1]
   puts "Please enter the #{recipient_string} you want to see information for. \nDo you want to enter an ID or a name?"
   property_type = gets.chomp
+  until validate_property_type(property_type)
+    puts "Please enter either name or ID"
+    property_type = gets.chomp
+  end
   puts "Thanks! Please enter it"
-  # TODO: ADD VALIDATIONS HERE
   name_or_id = gets.chomp
   if recipient_string == "channel"
     recipient = workspace.select_channel(name_or_id, property_type)
@@ -20,7 +30,6 @@ def recipient_details(input, workspace)
   if recipient == nil
     puts "This #{recipient_string} doesn't exist! Exiting..."
   end
-  # return recipient
 end
 
 def program_prompt(users, channels, workspace)

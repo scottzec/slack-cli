@@ -90,10 +90,6 @@ describe Workspace do
   end
 
   describe "send message method" do
-
-    # before do
-
-
     it "entering user sends message" do
       VCR.use_cassette("workspace") do
         message = "test"
