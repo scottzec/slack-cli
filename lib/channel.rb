@@ -21,7 +21,7 @@ class Channel < Recipient
 
     responses = response["channels"].map do |channel|
       self.new(slack_id: channel["id"], channel_name: channel["name"],
-      topic: channel["topic"], member_count: channel["num_members"])
+      topic: channel["purpose"]["value"], member_count: channel["num_members"])
     end
     return responses
   end

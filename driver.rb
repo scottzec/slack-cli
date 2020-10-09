@@ -10,18 +10,28 @@ Dotenv.load
 query = {
     token: ENV["SLACK_TOKEN"]
 }
-USER_LIST_URL = "https://slack.com/api/users.list?"
+# USER_LIST_URL = "https://slack.com/api/users.list?"
+
+CHANNEL_LIST_URL = "https://slack.com/api/conversations.list"
+
+# response = Channel.get(CHANNEL_LIST_URL, query)
+# puts response["channels"][0]["purpose"]["value"]
+# puts response["channels"][0]["topic"]
+
+channels = Channel.list_all
+puts channels[2].topic
+
+# puts response.keys
 
 
-
-message = "test"
-user = "scottzec999"
-property = "name"
-workspace = Workspace.new
-selected = workspace.select_user(user, property)
-# puts selected
-# puts selected.class
-puts selected.send_message(message)
+# message = "test"
+# user = "scottzec999"
+# property = "name"
+# workspace = Workspace.new
+# selected = workspace.select_user(user, property)
+# # puts selected
+# # puts selected.class
+# puts selected.send_message(message)
 
 
 # message_receipt = selected.send_message(message)
